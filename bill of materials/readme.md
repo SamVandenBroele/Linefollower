@@ -1,6 +1,7 @@
 ## bill of materials
 <br />
 | Nr. | Component                | Type / specificatie                               | Aangekocht | Gebruikt | Kostprijs verpakking | Kost in project | Opmerking  
+
 |   1 | Dubbele motordriver      | TB6612FNG breakoutmodule                          |          1 |        1 |                €4,61 |           €4,61 | Stuurt beide DC-motoren aan              |
 |   2 | Dupont jumperdraden      | 10 cm, diverse stekkertypes                       |      1 set |   n.v.t. |                €1,91 |           €1,91 | Alleen voor plan B                       |
 |   3 | Infraroodreflectiesensor | TCRT5000-module met VCC, GND, D0 en A0            |         10 |        8 |                €3,89 |          €3,11* | A0 wordt gebruikt als analoog signaal    |
