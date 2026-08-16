@@ -6,7 +6,7 @@ This folder contains the datasheets and technical documentation of all component
 
 - STM32F103C8T6 Microcontroller
 - TB6612FNG Dual Motor Driver
-- TCRT5000 Reflective Optical Sensor
+- TCRT5000 Reflective Optical Sensor Module
 - HM-10 Bluetooth Module
 - GA12-N20 DC Gear Motor
 - DC-DC Buck Converter
