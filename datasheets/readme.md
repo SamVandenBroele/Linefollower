@@ -33,8 +33,7 @@ reference for the motor family and does not describe the exact 300 RPM
 variant.
 
 ### DC-DC Buck Converter
-No official manufacturer datasheet was available for the exact DC-DC
-buck converter module used in this project.
 
-Therefore, no datasheet for the DC-DC buck converter is included in
-this folder.
+The DC-DC buck converter used in this project is a mini step-down module intended to convert the battery voltage to 5 V.
+The module is specified for an input voltage of approximately 4.5–24 V and provides selectable output voltages, including 5 V.
+No official manufacturer datasheet was available for the exact DC-DC buck converter module used in this project. Therefore, no datasheet for the complete module is included in this folder.
