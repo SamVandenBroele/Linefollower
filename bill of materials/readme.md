@@ -23,9 +23,9 @@ Deze Bill of Materials bevat de onderdelen voor het plan-B-prototype van de snel
 | 17 | EEPROM | 24LC256-I/P, 256 Kbit (32 KB), I²C, DIP-8 | 2 | 1 | €1,90 | €0,95 | Opslag van PID-instellingen, calibratie, maximumsnelheid enz. |
 | 18 | I²C pull-upweerstand | Metaalfilmweerstand, 4,7 kΩ | 10 | 2 | €0,35 | €0,07 | Pull-ups voor SDA en SCL |
 | 19 | Ontkoppelcondensator | Keramisch, 100 nF, KERKO 100N | 10 | 1 | €0,40 | €0,04 | Ontkoppeling bij EEPROM |
-| 20 | Start/stop-drukknop | Momentary tactile pushbutton, 6 × 6 mm | 50 | 1 | Reeds in bezit | €0,00 | Monostabiele START/STOP-schakelaar |
-| 21 | Power-on LED | Losse LED, THT | 1 | 1 | Reeds in bezit | €0,00 | Visuele indicatie dat de voeding ingeschakeld is |
-| 22 | LED-serieweerstand | 1 kΩ, THT | 1 | 1 | Reeds in bezit | €0,00 | Stroombegrenzing voor Power-on LED |
+| 20 | Start/stop-drukknop | Momentary tactile pushbutton, 6 × 6 mm | - | 1 | - | €0,00 | Monostabiele START/STOP-schakelaar; reeds in bezit |
+| 21 | Power-on LED | Losse LED, THT | - | 1 | - | €0,00 | Visuele indicatie dat de voeding ingeschakeld is; reeds in bezit |
+| 22 | LED-serieweerstand | 1 kΩ, THT | - | 1 | - | €0,00 | Stroombegrenzing voor Power-on LED; reeds in bezit |
 
 ## Kostenoverzicht
 
