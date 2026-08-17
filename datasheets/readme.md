@@ -11,6 +11,7 @@ for the components used in the Line Following Robot project.
 - HM-10 Bluetooth Module
 - GA12-N20 6V 300 RPM DC Gear Motor
 - DC-DC Buck Converter
+- 24LC256 I²C EEPROM
 
 ## Notes
 
