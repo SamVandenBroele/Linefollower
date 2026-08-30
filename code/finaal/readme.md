@@ -50,10 +50,10 @@ Hierdoor wordt de robot terug naar het midden van de zwarte lijn gestuurd.
 
 ## Snelheidsregeling
 
-De huidige instellingen zijn:
+De definitieve instellingen zijn:
 
-- snelheid op een recht stuk: `220`
-- snelheid in een bocht: `120`
+- snelheid op een recht stuk: `300`
+- snelheid in een bocht: `150`
 - grenswaarde voor bochtdetectie: `120`
 - maximale motorsnelheid in software: `600`
 - proportionele correctiefactor: `0,50`
@@ -132,6 +132,8 @@ De huidige finale software bevat de werkende functies die nodig zijn voor het Pl
 
 De parameters werden experimenteel afgesteld op het uiteindelijke prototype.
 
-Met de huidige instellingen volgt de robot de lijn stabiel en kan hij een kruispunt rechtdoor nemen.
+Met de definitieve instellingen `300` voor rechte stukken, `150` voor bochten en een proportionele correctiefactor van `0,50` volgt de robot de lijn stabiel en kan hij meerdere volledige rondes na elkaar afleggen.
+
+Ook het kruispunt wordt met deze instellingen correct rechtdoor genomen.
 
 De HM-10 Bluetoothmodule en 24LC256 EEPROM zijn voorzien in het elektronische ontwerp, maar worden niet actief gebruikt door de huidige finale lijnvolgsoftware.
