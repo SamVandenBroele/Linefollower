@@ -2,38 +2,43 @@
 
 Deze map bevat de finale software van het Plan-B-prototype van de snelle line-following robot.
 
-De software is ontwikkeld voor een STM32F103C8T6 en stuurt de lijnsensoren en beide DC-motoren rechtstreeks aan.
+De software is geschreven voor de STM32F103C8T6 en verzorgt de uitlezing van de lijnsensoren, de aansturing van beide motoren en de detectie van kruispunten.
 
 ## Bestandsstructuur
 
 ### Inc
 
-De map `Inc` bevat de headerbestanden:
-
-- `sensors.h` – declaraties voor het uitlezen van de lijnsensoren
-- `motors.h` – declaraties voor de aansturing van de motoren
-- `eeprom.h` – declaraties voor de 24LC256 EEPROM
-- `bluetooth.h` – declaraties voor de HM-10 Bluetoothmodule
+- `sensors.h` – definities en functies voor de lijnsensoren
+- `motors.h` – definities en functies voor de motorsturing
+- `bluetooth.h` – functies voorzien voor de HM-10 Bluetoothmodule
+- `eeprom.h` – functies voorzien voor de 24LC256 EEPROM
 
 ### Src
 
-De map `Src` bevat de bronbestanden:
-
 - `main.c` – hoofdprogramma en lijnvolgalgoritme
-- `sensors.c` – initialisatie en uitlezing van de TCRT5000-lijnsensoren
-- `motors.c` – PWM- en richtingssturing van beide DC-motoren via de TB6612FNG
-- `eeprom.c` – functies voor communicatie met de 24LC256 EEPROM
-- `bluetooth.c` – functies voor communicatie met de HM-10 Bluetoothmodule
+- `sensors.c` – ADC-uitlezing en berekening van de lijnpositie
+- `motors.c` – aansturing van de TB6612FNG en beide motoren
+- `bluetooth.c` – functies voor Bluetoothcommunicatie
+- `eeprom.c` – functies voor EEPROM-communicatie
 
-## Werking van het lijnvolgalgoritme
+## Lijnvolging
 
-Bij iedere cyclus worden de lijnsensoren uitgelezen.
+De robot gebruikt zes TCRT5000-reflectiesensoren.
 
-Op basis van de sensorwaarden wordt de positie van de zwarte lijn bepaald. Deze lijnpositie wordt gebruikt als foutsignaal voor de motorsturing.
+Alle zes sensoren worden analoog uitgelezen door de ADC van de STM32.
 
-De correctie wordt berekend met een proportionele regeling:
+In de huidige finale lijnregeling worden de eerste vijf sensoren gebruikt voor:
 
-`correctie = 0,75 × lijnpositie`
+- het berekenen van de lijnpositie;
+- het detecteren van een kruispunt.
+
+De zesde sensor wordt wel uitgelezen, maar niet meegenomen in de huidige regeling omdat deze in de gemonteerde opstelling een foutief hoge meetwaarde op wit gaf.
+
+De positie van de zwarte lijn wordt bepaald aan de hand van een gewogen gemiddelde van de sensorwaarden.
+
+Op basis van deze lijnpositie wordt een proportionele correctie berekend:
+
+`correctie = 0,50 × lijnpositie`
 
 De motorsnelheden worden vervolgens bepaald als:
 
@@ -41,49 +46,92 @@ De motorsnelheden worden vervolgens bepaald als:
 
 `motor B = basissnelheid - correctie`
 
-Hierdoor stuurt de robot automatisch terug naar de zwarte lijn.
+Hierdoor wordt de robot terug naar het midden van de zwarte lijn gestuurd.
 
 ## Snelheidsregeling
 
-Op rechte stukken wordt een hogere basissnelheid gebruikt.
+De huidige instellingen zijn:
 
-Wanneer de absolute lijnpositie groter wordt dan de ingestelde bochtdrempel, wordt de basissnelheid verlaagd zodat de robot stabieler door bochten kan rijden.
+- snelheid op een recht stuk: `220`
+- snelheid in een bocht: `120`
+- grenswaarde voor bochtdetectie: `120`
+- maximale motorsnelheid in software: `600`
+- proportionele correctiefactor: `0,50`
 
-De gebruikte waarden in de finale code zijn:
+Wanneer de absolute waarde van de lijnpositie groter wordt dan `120`, wordt de lagere bochtsnelheid gebruikt.
 
-- rechte snelheid: `220`
-- bochtsnelheid: `150`
-- bochtdrempel: `120`
-- maximale motorsnelheid: `600`
+Hierdoor rijdt de robot sneller op rechte stukken en trager wanneer een grotere stuurcorrectie nodig is.
 
 ## Kruispuntdetectie
 
-De robot is geprogrammeerd om op een kruispunt rechtdoor te rijden.
+Een brede zwarte zone wordt als kruispunt beschouwd wanneer minimaal drie van de gebruikte lijnsensoren tegelijk zwart detecteren.
 
-Wanneer minstens drie sensoren gelijktijdig zwart detecteren, wordt dit beschouwd als een brede zwarte zone en wordt de kruispuntmodus geactiveerd.
+Wanneer een kruispunt wordt gedetecteerd:
 
-Tijdens deze modus:
+1. wordt de normale lijncorrectie tijdelijk uitgeschakeld;
+2. krijgen beide motoren dezelfde snelheid;
+3. rijdt de robot rechtdoor over het kruispunt;
+4. blijft de kruispuntmodus actief tot opnieuw gedurende meerdere meetcycli een normale lijn wordt waargenomen.
 
-- wordt de normale lijncorrectie tijdelijk uitgeschakeld;
-- krijgen beide motoren dezelfde snelheid;
-- rijdt de robot rechtdoor over het kruispunt.
+De gebruikte instellingen zijn:
 
-De kruispuntmodus wordt pas verlaten nadat gedurende meerdere opeenvolgende meetcycli opnieuw een normale lijn wordt waargenomen.
-
-## Sensoren
-
-Voor de lijnvolging worden zes TCRT5000-reflectiesensoren analoog uitgelezen via de ADC van de STM32F103C8T6.
-
-In de huidige kruispuntdetectie worden de eerste vijf sensorwaarden gebruikt. De zesde sensor wordt daar voorlopig niet meegenomen.
+- minimaal aantal zwarte sensoren: `3`
+- aantal cycli voor het verlaten van de kruispuntmodus: `300`
 
 ## Motorsturing
 
-Beide GA12-N20 DC-motoren worden aangestuurd via een TB6612FNG dubbele H-brug.
+De twee GA12-N20 DC-motoren worden aangestuurd met een TB6612FNG dubbele H-brug.
 
 De snelheid wordt geregeld met PWM.
 
-De software kan beide motoren afzonderlijk aansturen, waardoor de robot kan corrigeren naar links of rechts.
+De gebruikte aansluitingen zijn:
 
-## Opmerking
+### Motor A
 
-De waarden voor snelheid, bochtdetectie en kruispuntdetectie zijn experimenteel afgestemd op het Plan-B-prototype en het gebruikte testparcours.
+- PWMA → PA8
+- AIN1 → PB13
+- AIN2 → PB12
+
+### Motor B
+
+- PWMB → PB3
+- BIN1 → PB15
+- BIN2 → PA9
+
+### TB6612FNG
+
+- STBY → PB14
+- VCC → 3,3 V
+- VM → 5 V
+- GND → gemeenschappelijke GND
+
+## Sensoren
+
+De gebruikte analoge ingangen zijn:
+
+- S0 → PA0
+- S1 → PA1
+- S2 → PA4
+- S3 → PA5
+- S4 → PA6
+- S5 → PA7
+
+De zes sensoren worden gevoed via de 3,3 V-uitgang van de STM32.
+
+## Huidige uitvoering
+
+De huidige finale software bevat de werkende functies die nodig zijn voor het Plan-B-prototype:
+
+- analoog uitlezen van zes lijnsensoren;
+- bepalen van de lijnpositie;
+- proportionele lijncorrectie;
+- afzonderlijke PWM-aansturing van beide motoren;
+- vertragen in bochten;
+- detecteren van kruispunten;
+- rechtdoor rijden over kruispunten.
+
+De parameters werden experimenteel afgesteld op het uiteindelijke prototype.
+
+Met de huidige instellingen volgt de robot de lijn stabiel en kan hij een kruispunt rechtdoor nemen.
+
+De HM-10 Bluetoothmodule en 24LC256 EEPROM zijn voorzien in het elektronische ontwerp, maar worden niet actief gebruikt door de huidige finale lijnvolgsoftware.
