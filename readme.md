@@ -4,6 +4,8 @@ Dit project bevat het ontwerp en de realisatie van een snelle autonome line-foll
 
 Het gerealiseerde prototype is een Plan-B-uitvoering en gebruikt zes analoge reflectiesensoren om een zwarte lijn op een witte ondergrond te volgen.
 
+![Line Follower Robot](images/IMG_3940.jpeg)
+
 ## Specificaties
 
 - Microcontroller: STM32F103C8T6
@@ -27,9 +29,11 @@ De zes TCRT5000-sensoren worden analoog uitgelezen door de ADC van de STM32.
 
 Op basis van de gemeten sensorwaarden wordt de positie van de zwarte lijn bepaald. De STM32 past vervolgens via PWM de snelheid van beide motoren onafhankelijk aan.
 
+De lijncorrectie is proportioneel met de gemeten afwijking van de lijn. In de huidige finale software wordt een proportionele correctiefactor van `0,50` gebruikt.
+
 De software maakt onderscheid tussen rechte stukken en bochten en verlaagt de basissnelheid wanneer een grotere afwijking van de lijn wordt gedetecteerd.
 
-Bij detectie van een brede zwarte zone wordt deze als kruispunt beschouwd. De robot rijdt hierbij rechtdoor.
+Bij detectie van een brede zwarte zone wordt deze als kruispunt beschouwd. De normale lijncorrectie wordt dan tijdelijk uitgeschakeld en beide motoren krijgen dezelfde snelheid, zodat de robot rechtdoor over het kruispunt rijdt.
 
 ## Repository
 
@@ -48,18 +52,50 @@ De belangrijkste onderdelen van het project zijn terug te vinden in de volgende 
 
 ## Line-following software
 
-De belangrijkste parameters van de huidige software zijn:
+De belangrijkste parameters van de huidige werkende software zijn:
 
-- snelheid recht stuk: 220
-- snelheid bocht: 150
-- grenswaarde bochtdetectie: 120
-- maximale motorsnelheid in software: 600
-- proportionele correctiefactor: 0,75
-- kruispuntdetectie: minimaal 3 sensoren detecteren zwart
+- snelheid recht stuk: `220`
+- snelheid bocht: `120`
+- grenswaarde bochtdetectie: `120`
+- maximale motorsnelheid in software: `600`
+- proportionele correctiefactor: `0,50`
+- kruispuntdetectie: minimaal `3` sensoren detecteren zwart
+- kruispunt vrijgave: `300` meetcycli
 
 Alle zes lijnsensoren worden door de STM32 uitgelezen.
 
-In de huidige finale software worden de eerste vijf sensoren gebruikt voor de berekening van de lijnpositie en kruispuntdetectie. De zesde sensor wordt wel uitgelezen, maar niet meegenomen in deze berekeningen wegens een foutieve hoge meetwaarde op wit in de gemonteerde opstelling.
+In de huidige finale software worden de eerste vijf sensoren gebruikt voor de berekening van de lijnpositie en de kruispuntdetectie.
+
+De zesde sensor wordt wel uitgelezen, maar niet meegenomen in deze berekeningen wegens een foutieve hoge meetwaarde op wit in de gemonteerde opstelling.
+
+## Motorsturing
+
+De twee GA12-N20 DC-motoren worden onafhankelijk aangestuurd via de TB6612FNG.
+
+De snelheid van beide motoren wordt geregeld met PWM.
+
+Bij normale lijnvolging wordt de motorsnelheid bepaald volgens:
+
+`motor A = basissnelheid + correctie`
+
+`motor B = basissnelheid - correctie`
+
+waarbij:
+
+`correctie = 0,50 × lijnpositie`
+
+## Kruispunten
+
+Wanneer minimaal drie van de gebruikte lijnsensoren tegelijk zwart detecteren, wordt dit als een brede zwarte zone of kruispunt beschouwd.
+
+Tijdens de kruispuntmodus:
+
+- wordt de normale lijncorrectie tijdelijk uitgeschakeld;
+- krijgen beide motoren dezelfde snelheid;
+- rijdt de robot rechtdoor;
+- wordt pas na meerdere normale meetcycli terug overgeschakeld naar de gewone lijnregeling.
+
+Met de huidige instellingen kan het prototype het kruispunt rechtdoor nemen.
 
 ## Huidige uitvoering
 
@@ -70,3 +106,5 @@ Als derde steunpunt onder het chassis wordt een LEGO-gezichtje gebruikt dat reed
 De HM-10 Bluetoothmodule en 24LC256 EEPROM zijn voorzien in het elektronische ontwerp, maar worden niet actief gebruikt door de huidige finale lijnvolgsoftware.
 
 Het uiteindelijke prototype heeft geen afzonderlijke START/STOP-drukknop en geen Power-on LED.
+
+De parameters van de lijnregeling werden experimenteel afgesteld op het uiteindelijke prototype. Met de huidige instellingen volgt de robot de lijn stabiel en neemt hij het kruispunt rechtdoor.
