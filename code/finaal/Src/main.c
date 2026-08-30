@@ -22,8 +22,7 @@
    ========================================================= */
 
 #define STRAIGHT_SPEED          220
-#define CURVE_SPEED             150
-
+#define CURVE_SPEED             120
 #define CURVE_THRESHOLD         120
 
 #define MAX_MOTOR_SPEED         600
@@ -46,19 +45,16 @@
    ========================================================= */
 
 volatile int16_t line_position = 0;
-
 volatile int16_t correction = 0;
 
 volatile int16_t base_speed = 0;
 
 volatile int16_t motor_a_speed = 0;
-
 volatile int16_t motor_b_speed = 0;
 
 volatile uint8_t black_sensor_count = 0;
 
 volatile uint8_t crossing_mode = 0;
-
 volatile uint16_t crossing_clear_counter = 0;
 
 
@@ -71,14 +67,11 @@ int main(void)
     /* Sensoren initialiseren */
     Sensors_Init();
 
-
     /* Motorsturing initialiseren */
     Motors_Init();
 
-
     /* TB6612 inschakelen */
     Motors_Enable();
-
 
     /* Eerst stilstaan */
     Motors_Stop();
@@ -134,11 +127,9 @@ int main(void)
              * betekent dat de zwarte zone veel breder
              * is dan een normale lijn.
              */
-
             if (black_sensor_count >= CROSS_SENSOR_COUNT)
             {
                 crossing_mode = 1;
-
                 crossing_clear_counter = 0;
             }
         }
@@ -160,12 +151,9 @@ int main(void)
              */
 
             motor_a_speed = STRAIGHT_SPEED;
-
             motor_b_speed = STRAIGHT_SPEED;
 
-
             MotorA_SetSpeed(motor_a_speed);
-
             MotorB_SetSpeed(motor_b_speed);
 
 
@@ -186,11 +174,9 @@ int main(void)
 
                 crossing_clear_counter++;
 
-
                 if (crossing_clear_counter >= CROSS_CLEAR_COUNT)
                 {
                     crossing_mode = 0;
-
                     crossing_clear_counter = 0;
                 }
             }
@@ -234,11 +220,11 @@ int main(void)
             /* ---------------------------------------------
                P-regeling
 
-               correctie = 75% van lijnpositie
+               correctie = 50% van lijnpositie
                --------------------------------------------- */
 
             correction =
-                    (int16_t)(((int32_t)line_position * 3) / 4);
+                    (int16_t)(((int32_t)line_position) / 2);
 
 
             /* ---------------------------------------------
@@ -246,7 +232,6 @@ int main(void)
                --------------------------------------------- */
 
             motor_a_speed = base_speed + correction;
-
             motor_b_speed = base_speed - correction;
 
 
@@ -285,9 +270,7 @@ int main(void)
                --------------------------------------------- */
 
             MotorA_SetSpeed(motor_a_speed);
-
             MotorB_SetSpeed(motor_b_speed);
         }
     }
 }
-
