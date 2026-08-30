@@ -24,8 +24,8 @@ Deze Bill of Materials bevat de onderdelen die gebruikt worden voor het Plan-B-p
 | 18 | I²C pull-upweerstand | Metaalfilmweerstand, 4,7 kΩ | 10 | 2 | €0,35 | €0,07 | Pull-upweerstanden voor SDA en SCL van de I²C-bus |
 | 19 | Ontkoppelcondensator | Keramisch, 100 nF, KERKO 100N | 10 | 1 | €0,40 | €0,04 | Voedingsontkoppeling bij de EEPROM |
 | 20 | Start/stop-drukknop | Momentary tactile pushbutton, 6 × 6 mm | - | 1 | - | €0,00 | Monostabiele START/STOP-drukknop; reeds in bezit |
-| 21 | Power-on LED | Losse LED, THT | - | 1 | - | €0,00 | Visuele indicatie dat de robot ingeschakeld is; reeds in bezit |
-| 22 | LED-serieweerstand | 1 kΩ, THT | - | 1 | - | €0,00 | Stroombegrenzing voor de Power-on LED; reeds in bezit |
+| 21 | Power-on LED | Losse LED, THT | - | 0 | - | €0,00 | Voorzien in het elektrisch ontwerp, maar niet gemonteerd op het uiteindelijke Plan-B-prototype |
+| 22 | LED-serieweerstand | 1 kΩ, THT | - | 0 | - | €0,00 | Voorzien voor de Power-on LED, maar niet gebruikt op het uiteindelijke Plan-B-prototype |
 
 ## Voedingsverdeling
 
