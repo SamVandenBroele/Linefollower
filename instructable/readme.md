@@ -24,6 +24,9 @@ De belangrijkste onderdelen zijn:
 - Dupont jumperdraden
 - HM-10 Bluetoothmodule
 - 24LC256 EEPROM
+- LEGO-gezichtje als glijsteun
+
+Het LEGO-gezichtje was reeds thuis beschikbaar en wordt gebruikt als derde steunpunt van de robot. Het glijdt tijdens het rijden over het parcours.
 
 ## Stap 2 – Bouw het chassis
 
@@ -33,8 +36,9 @@ Monteer vervolgens:
 
 1. beide GA12-N20 motoren;
 2. beide aandrijfwielen;
-3. de sensoropstelling aan de voorzijde;
-4. de elektronische componenten op het chassis.
+3. het LEGO-gezichtje als glijsteun en derde steunpunt;
+4. de sensoropstelling aan de voorzijde;
+5. de elektronische componenten op het chassis.
 
 Gebruik de mechanische tekeningen in de repository als referentie voor de afmetingen en plaatsing van de onderdelen.
 
@@ -186,6 +190,8 @@ Koppel de LiPo-batterij los wanneer de robot langere tijd niet gebruikt wordt.
 
 ## Opmerking
 
-Het huidige Plan-B-prototype heeft geen afzonderlijke START/STOP-drukknop, geen Power-on LED en geen kogelwiel.
+Het huidige Plan-B-prototype heeft geen afzonderlijke START/STOP-drukknop en geen Power-on LED.
+
+Als derde steunpunt wordt een LEGO-gezichtje gebruikt dat reeds thuis beschikbaar was. Dit onderdeel dient als eenvoudige glijsteun onder het chassis.
 
 De HM-10 Bluetoothmodule en 24LC256 EEPROM zijn voorzien in het elektronische ontwerp, maar zijn niet geïntegreerd in de huidige finale lijnvolgsoftware.
