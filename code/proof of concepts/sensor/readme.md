@@ -8,13 +8,9 @@ De zes TCRT5000-lijnsensoren werden afzonderlijk uitgelezen via de 12-bit ADC va
 
 Bij een witte ondergrond geven de sensoren een relatief lage ADC-waarde. De onderstaande screenshot toont de ruwe ADC-waarden van de zes sensoren.
 
-![Sensoren op witte ondergrond](sensor_wit.png)
-
 ### Meting op zwarte ondergrond
 
 Bij een zwarte ondergrond stijgt de gemeten ADC-waarde duidelijk. Hierdoor kan de software onderscheid maken tussen de witte ondergrond en de zwarte lijn.
-
-![Sensoren op zwarte ondergrond](sensor_zwart.png)
 
 ### Conclusie
 
