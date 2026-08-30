@@ -6,12 +6,16 @@ De zes TCRT5000-lijnsensoren werden afzonderlijk uitgelezen via de 12-bit ADC va
 
 ### Meting op witte ondergrond
 
-Bij een witte ondergrond geven de sensoren een relatief lage ADC-waarde. De onderstaande screenshot toont de ruwe ADC-waarden van de zes sensoren.
+Bij een witte ondergrond werden ADC-waarden tussen ongeveer 200 en 336 gemeten.
 
 ### Meting op zwarte ondergrond
 
-Bij een zwarte ondergrond stijgt de gemeten ADC-waarde duidelijk. Hierdoor kan de software onderscheid maken tussen de witte ondergrond en de zwarte lijn.
+Bij een zwarte ondergrond werden ADC-waarden tussen ongeveer 1700 en 3769 gemeten.
 
 ### Conclusie
 
-De test toont aan dat alle zes TCRT5000-sensoren onafhankelijk via de ADC kunnen worden uitgelezen en dat er een duidelijk verschil meetbaar is tussen wit en zwart. De getoonde waarden zijn ruwe ADC-waarden; voor deze proof of concept wordt geen normalisatie of interpolatie toegepast.
+De test toont aan dat alle zes TCRT5000-sensoren onafhankelijk via de ADC kunnen worden uitgelezen. Er is een duidelijk verschil tussen de gemeten waarden op een witte en een zwarte ondergrond.
+
+De STM32F103C8T6 beschikt over een 12-bit ADC met een bereik van 0 tot 4095. De gemeten waarden benutten een groot deel van dit bereik, met waarden tot 3769 op de zwarte ondergrond.
+
+Voor deze proof of concept worden de ruwe ADC-waarden rechtstreeks weergegeven. Er wordt geen normalisatie of interpolatie toegepast.
