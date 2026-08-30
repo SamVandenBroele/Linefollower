@@ -17,15 +17,15 @@ Deze Bill of Materials bevat de onderdelen die gebruikt worden voor het Plan-B-p
 | 11 | Batterijconnector | XT60 mannelijk en vrouwelijk | 2 sets | 1 set | €2,38 | €1,19 | Afneembare verbinding tussen LiPo en robot |
 | 12 | LiPo-batterij | 2S, 7,4 V, 1500 mAh, 45C | 1 | 1 | €7,91 | €7,91 | Nominaal 7,4 V; maximaal 8,4 V volledig geladen |
 | 13 | Pinheaders | 2,54 mm male headers | 10 strips | n.v.t. | €0,68 | €0,68 | Voor modulaire elektrische aansluitingen |
-| 14 | Kogelwiel | CY-19D metalen ball caster | 1 | 1 | €1,27 | €1,27 | Derde steunpunt van het chassis |
+| 14 | Glijsteun | LEGO-gezichtje | - | 1 | - | €0,00 | Reeds in bezit; gebruikt als derde steunpunt onder het chassis |
 | 15 | Prototypeprintplaat | Dubbelzijdig protoboard, 6 × 8 cm | 3 | 1 | €2,90 | €0,97 | Printplaat voor de Plan-B-elektronica |
 | 16 | Chassismateriaal | PVC-plaat, 4 mm, 100 × 200 mm | 1 | 1 | €4,13 | €4,13 | Basisplaat van de robot |
 | 17 | EEPROM | 24LC256-I/P, 256 Kbit (32 KB), I²C, DIP-8 | 2 | 1 | €1,90 | €0,95 | Fysiek voorzien; niet geïntegreerd in de huidige finale lijnvolgsoftware |
 | 18 | I²C pull-upweerstand | Metaalfilmweerstand, 4,7 kΩ | 10 | 2 | €0,35 | €0,07 | Pull-upweerstanden voor SDA en SCL van de I²C-bus |
 | 19 | Ontkoppelcondensator | Keramisch, 100 nF, KERKO 100N | 10 | 1 | €0,40 | €0,04 | Voedingsontkoppeling bij de EEPROM |
-| 20 | Start/stop-drukknop | Momentary tactile pushbutton, 6 × 6 mm | - | 0 | - | €0,00 | Voorzien in het elektrisch ontwerp, maar niet gemonteerd op het uiteindelijke Plan-B-prototype |
-| 21 | Power-on LED | Losse LED, THT | - | 0 | - | €0,00 | Voorzien in het elektrisch ontwerp, maar niet gemonteerd op het uiteindelijke Plan-B-prototype |
-| 22 | LED-serieweerstand | 1 kΩ, THT | - | 0 | - | €0,00 | Voorzien voor de Power-on LED, maar niet gebruikt op het uiteindelijke Plan-B-prototype |
+| 20 | Start/stop-drukknop | Momentary tactile pushbutton, 6 × 6 mm | - | 0 | - | €0,00 | Niet gemonteerd op het uiteindelijke Plan-B-prototype |
+| 21 | Power-on LED | Losse LED, THT | - | 0 | - | €0,00 | Niet gemonteerd op het uiteindelijke Plan-B-prototype |
+| 22 | LED-serieweerstand | 1 kΩ, THT | - | 0 | - | €0,00 | Niet gebruikt op het uiteindelijke Plan-B-prototype |
 
 ## Voedingsverdeling
 
@@ -48,13 +48,13 @@ De voedingsverdeling is als volgt:
 
 ## Bediening
 
-Het huidige Plan-B-prototype beschikt uitsluitend over een bistabiele tuimelschakelaar voor het in- en uitschakelen van de robot.
+Het huidige Plan-B-prototype wordt in- en uitgeschakeld met een bistabiele tuimelschakelaar.
 
-Een afzonderlijke START/STOP-drukknop en Power-on LED zijn niet gemonteerd op het uiteindelijke prototype.
+Als derde steunpunt onder het chassis wordt een LEGO-gezichtje gebruikt dat reeds thuis beschikbaar was. Dit werkt als eenvoudige glijsteun tijdens het rijden.
 
 ## Kostenoverzicht
 
 | Omschrijving | Bedrag |
 |---|---:|
-| Totale aankoopprijs onderdelen | €51,37 |
-| Geschatte kost van gebruikte onderdelen in één robot | ca. €41,49 |
+| Totale aankoopprijs van de in deze BOM opgenomen onderdelen | €50,10 |
+| Geschatte kost van gebruikte onderdelen in één robot | ca. €40,22 |
