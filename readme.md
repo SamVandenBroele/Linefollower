@@ -29,9 +29,9 @@ De zes TCRT5000-sensoren worden analoog uitgelezen door de ADC van de STM32.
 
 Op basis van de gemeten sensorwaarden wordt de positie van de zwarte lijn bepaald. De STM32 past vervolgens via PWM de snelheid van beide motoren onafhankelijk aan.
 
-De lijncorrectie is proportioneel met de gemeten afwijking van de lijn. In de huidige finale software wordt een proportionele correctiefactor van `0,50` gebruikt.
+De lijncorrectie is proportioneel met de gemeten afwijking van de lijn. In de definitieve software wordt een proportionele correctiefactor van `0,50` gebruikt.
 
-De software maakt onderscheid tussen rechte stukken en bochten en verlaagt de basissnelheid wanneer een grotere afwijking van de lijn wordt gedetecteerd.
+De software maakt onderscheid tussen rechte stukken en bochten. Op rechte stukken wordt een hogere basissnelheid gebruikt en in bochten wordt deze snelheid verlaagd.
 
 Bij detectie van een brede zwarte zone wordt deze als kruispunt beschouwd. De normale lijncorrectie wordt dan tijdelijk uitgeschakeld en beide motoren krijgen dezelfde snelheid, zodat de robot rechtdoor over het kruispunt rijdt.
 
@@ -52,10 +52,10 @@ De belangrijkste onderdelen van het project zijn terug te vinden in de volgende 
 
 ## Line-following software
 
-De belangrijkste parameters van de huidige werkende software zijn:
+De belangrijkste parameters van de definitieve werkende software zijn:
 
-- snelheid recht stuk: `220`
-- snelheid bocht: `120`
+- snelheid recht stuk: `300`
+- snelheid bocht: `150`
 - grenswaarde bochtdetectie: `120`
 - maximale motorsnelheid in software: `600`
 - proportionele correctiefactor: `0,50`
@@ -95,7 +95,7 @@ Tijdens de kruispuntmodus:
 - rijdt de robot rechtdoor;
 - wordt pas na meerdere normale meetcycli terug overgeschakeld naar de gewone lijnregeling.
 
-Met de huidige instellingen kan het prototype het kruispunt rechtdoor nemen.
+Met de definitieve instellingen neemt het prototype het kruispunt correct rechtdoor.
 
 ## Huidige uitvoering
 
@@ -107,4 +107,6 @@ De HM-10 Bluetoothmodule en 24LC256 EEPROM zijn voorzien in het elektronische on
 
 Het uiteindelijke prototype heeft geen afzonderlijke START/STOP-drukknop en geen Power-on LED.
 
-De parameters van de lijnregeling werden experimenteel afgesteld op het uiteindelijke prototype. Met de huidige instellingen volgt de robot de lijn stabiel en neemt hij het kruispunt rechtdoor.
+De parameters van de lijnregeling werden experimenteel afgesteld op het uiteindelijke prototype.
+
+Met de definitieve instellingen volgt de robot de lijn stabiel, neemt hij het kruispunt correct rechtdoor en kan hij meerdere volledige rondes na elkaar afleggen.
