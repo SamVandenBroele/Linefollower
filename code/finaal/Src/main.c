@@ -21,8 +21,8 @@
    INSTELLINGEN
    ========================================================= */
 
-#define STRAIGHT_SPEED          220
-#define CURVE_SPEED             120
+#define STRAIGHT_SPEED          300
+#define CURVE_SPEED             150
 #define CURVE_THRESHOLD         120
 
 #define MAX_MOTOR_SPEED         600
