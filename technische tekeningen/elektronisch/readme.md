@@ -1,8 +1,6 @@
 
 ## Elektronisch schema
 
-Het volledige elektronische schema van het Plan-B-prototype is beschikbaar in de map `Hardware/Elektronisch_schema`.
-
 Het schema bevat:
 - STM32F103C8T6
 - 6 × TCRT5000 lijnsensor
