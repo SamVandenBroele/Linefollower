@@ -1,39 +1,43 @@
 # Datasheets
 
-This folder contains the available datasheets and technical documentation
-for the components used in the Line Following Robot project.
+Deze map bevat de beschikbare datasheets en technische documentatie van de belangrijkste componenten die gebruikt worden in de Line Following Robot.
 
-## Components
+## Componenten
 
-- STM32F103C8T6 Microcontroller
-- TB6612FNG Dual Motor Driver
-- TCRT5000 Reflective Optical Sensor Module
-- HM-10 Bluetooth Module
-- GA12-N20 6V 300 RPM DC Gear Motor
-- DC-DC Buck Converter
+De volgende documentatie is opgenomen:
+
+- STM32F103C8T6 microcontroller
+- TB6612FNG dubbele motordriver
+- TCRT5000 reflectieve optische sensor
+- HM-10 Bluetoothmodule
+- GA12-N20 6 V 300 rpm DC-reductiemotor
 - 24LC256 I²C EEPROM
 
-## Notes
+## TCRT5000-sensormodule
 
-### TCRT5000 Sensor Module
-The TCRT5000 sensors used in this project are sensor modules containing
-a TCRT5000 reflective optical sensor with additional onboard circuitry,
-including an LM393 comparator.
+De TCRT5000-sensoren die in dit project gebruikt worden, zijn complete sensormodules met een TCRT5000 reflectieve optische sensor en bijkomende elektronica, waaronder een LM393-comparator.
 
-No official datasheet for the complete sensor module was available.
-Therefore, the manufacturer's datasheet of the TCRT5000 sensor itself
-is included as a technical reference.
+Er was geen officiële datasheet beschikbaar voor de volledige gebruikte sensormodule.
 
-### GA12-N20 6V 300 RPM Motor
-No official manufacturer datasheet was available for the exact
-GA12-N20 6V 300 RPM motor used in this project.
+Daarom is de datasheet van de TCRT5000-sensor zelf opgenomen als technische referentie.
 
-The included GA12-N20 document is therefore used as a general technical
-reference for the motor family and does not describe the exact 300 RPM
-variant.
+In het uiteindelijke prototype wordt de analoge uitgang A0 van de sensormodule gebruikt.
 
-### DC-DC Buck Converter
+## GA12-N20 6 V 300 rpm motor
 
-The DC-DC buck converter used in this project is a mini step-down module intended to convert the battery voltage to 5 V.
-The module is specified for an input voltage of approximately 4.5–24 V and provides selectable output voltages, including 5 V.
-No official manufacturer datasheet was available for the exact DC-DC buck converter module used in this project. Therefore, no datasheet for the complete module is included in this folder.
+Voor de exacte GA12-N20 6 V 300 rpm motor die in dit project gebruikt wordt, was geen officiële datasheet beschikbaar.
+
+Het opgenomen GA12-N20-document wordt daarom gebruikt als algemene technische referentie voor deze motorfamilie en beschrijft niet noodzakelijk exact de gebruikte 300 rpm-variant.
+
+## MP1584EN buckconverter
+
+Voor de voedingsregeling worden twee instelbare MP1584EN DC-DC step-down buckconverters gebruikt.
+
+De batterijspanning van de 2S LiPo wordt hiermee verlaagd naar:
+
+- 3,3 V voor de 3,3 V-logica;
+- 5 V voor de STM32 en de motorvoeding.
+
+De gebruikte modules zijn gebaseerd op de MP1584EN en hebben een instelbare uitgangsspanning.
+
+Er is momenteel geen aparte datasheet van de gebruikte MP1584EN-module opgenomen in deze map.
