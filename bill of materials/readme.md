@@ -11,7 +11,7 @@ Deze Bill of Materials bevat de onderdelen die gebruikt worden voor het Plan-B-p
 | 5 | Bluetoothmodule | HM-10 BLE 4.0 | 1 | 1 | €3,14 | €3,14 | Voor draadloze communicatie en het aanpassen/uitlezen van instellingen |
 | 6 | Printkroonsteen | KF301, 2-polig, steek 5,0 mm | 50 | ca. 4 | €0,88 | €0,07 | Voor motor- en voedingsaansluitingen |
 | 7 | Aan-uitschakelaar | GOOBAY 10013, mini-tuimelschakelaar, ON-OFF, 3 A / 125 V | 2 | 1 | €1,22 | €0,61 | Bistabiele hoofdschakelaar voor de batterijvoeding |
-| 8 | DC-DC buckconverter | DollaTek MP1584EN, instelbaar, 4,5–28 V ingang, 0,8–20 V uitgang, max. 3 A | 5 | 2 | €4,99 | €2,00 | Eén ingesteld op 5 V voor STM32 en één op 6 V voor TB6612 VM / motorvoeding |
+| 8 | DC-DC buckconverter | DollaTek MP1584EN, instelbaar, 4,5–28 V ingang, 0,8–20 V uitgang, max. 3 A | 5 | 2 | €4,99 | €2,00 | Eén ingesteld op 3,3 V voor de logica en één ingesteld op 5 V voor STM32 en motorvoeding |
 | 9 | Robotwiel | Rubber wiel, diameter 44 mm, geschikt voor N20-as | 2 | 2 | €0,52 | €0,52 | Aandrijfwielen |
 | 10 | DC-reductiemotor | GA12-N20, 6 V, 300 rpm | 2 | 2 | €3,60 | €3,60 | Aandrijving van de robot |
 | 11 | Batterijconnector | XT60 mannelijk en vrouwelijk | 2 sets | 1 set | €2,38 | €1,19 | Afneembare verbinding tussen LiPo en robot |
@@ -33,12 +33,18 @@ De robot wordt gevoed door een 2S LiPo-batterij van 7,4 V nominaal en maximaal 8
 
 De voedingsverdeling is als volgt:
 
-- LiPo-batterij → hoofdschakelaar → voedingsverdeling
-- Buckconverter 1 → 5 V → STM32F103C8T6 development board
-- STM32 3,3 V → TCRT5000-sensoren
-- STM32 3,3 V → VCC van de TB6612FNG
-- Buckconverter 2 → 6 V → VM van de TB6612FNG
-- TB6612FNG → beide 6 V GA12-N20 motoren
+- LiPo-batterij → hoofdschakelaar → beide buckconverters
+- Buckconverter 1 → **3,3 V**
+  - TB6612FNG VCC
+  - 24LC256 EEPROM
+  - HM-10 Bluetoothmodule
+  - I²C pull-upweerstanden
+- Buckconverter 2 → **5 V**
+  - STM32F103C8T6 development board
+  - TB6612FNG VM / motorvoeding
+  - Power-on LED via 1 kΩ serieweerstand
+- STM32 3,3 V-uitgang → zes TCRT5000-lijnsensoren
+- TB6612FNG → beide GA12-N20 DC-motoren
 - Alle subsystemen gebruiken een gemeenschappelijke GND
 
 ## Kostenoverzicht
